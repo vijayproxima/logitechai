@@ -5,7 +5,9 @@ from langchain.llms.openai import OpenAI
 from langchain.agents import AgentExecutor
 from langchain.agents.agent_types import AgentType
 
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
+load_dotenv()
+
 import os
 import psycopg2
 
@@ -19,6 +21,14 @@ DBHOST=os.environ["DBHOST"]
 
 db = SQLDatabase.from_uri(f"postgresql+psycopg2://{DBUSER}:{DBPWD}@localhost:5432/{DBNAME}")
 
+toolkit = SQLDatabaseToolkit(db=db, llm=OpenAI(temperature=0))
+
+agent_executor = create_sql_agent(
+    llm=OpenAI(temperature=0),
+    toolkit=toolkit,
+    verbose=True,
+    agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+)
 #setup llm
 
 #llm = OpenAI(temperature=0)
@@ -42,7 +52,7 @@ Answer: Final answer here
 #setup llm chain
 import streamlit as st
 
-st.title("Welcom to Waterworth !!!")
+st.title("Welcome to Logitech !!!")
 
 query = st.chat_input("Say something..")
 
