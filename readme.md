@@ -13,3 +13,7 @@ git push -u origin develop
 git remote add origin https://github.com/vijayproxima/logitechai.git
 git branch -M develop
 git push -u origin develop
+
+## Read data tables using ChatGPT and Pandas dataframe
+
+## read data tables using Vertex AI
