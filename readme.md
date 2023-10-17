@@ -23,3 +23,7 @@ git status
 git add .
 git commit -m "info"
 git push origin develop
+
+## pip version: 23.3
+## python version 3.11.5
+
