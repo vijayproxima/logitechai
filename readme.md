@@ -17,3 +17,9 @@ git push -u origin develop
 ## Read data tables using ChatGPT and Pandas dataframe
 
 ## read data tables using Vertex AI
+
+## whenever a file is changed, use the following steps:
+git status
+git add .
+git commit -m "info"
+git push origin develop
