@@ -27,3 +27,5 @@ git push origin develop
 ## pip version: 23.3
 ## python version 3.11.5
 
+The [node -r esm index.js] "-r esm" flag is used to enable support for ECMAScript Modules in Node.js, which allows you to use import and export statements for module loading instead of the older require syntax commonly associated with CommonJS modules.
+

@@ -1,0 +1,491 @@
+NLP Database - Processed Bug Reports Table
+-- public.processed_bugreports definition
+
+-- Drop table
+
+-- DROP TABLE public.processed_bugreports;
+
+CREATE TABLE public.processed_bugreports (
+	id varchar(255) NOT NULL,
+	created_at timestamptz(0) NULL,
+	updated_at timestamptz(0) NULL,
+	device_id varchar(255) NULL,
+	bugreport varchar(255) NOT NULL,
+	end_time timestamptz(0) NULL,
+	status varchar(255) NULL,
+	os varchar(255) NULL,
+	device_type varchar(255) NULL,
+	number_meetings int4 NULL,
+	sum_meetings float4 NULL,
+	has_error bool NULL,
+	error text NULL,
+	"comment" varchar(255) NULL,
+	ecs_arn varchar(255) NULL,
+	CONSTRAINT processed_bugreports_bugreport_unique UNIQUE (bugreport),
+	CONSTRAINT processed_bugreports_pkey PRIMARY KEY (id)
+);
+CREATE INDEX processed_bugreports_bugreport_index ON public.processed_bugreports USING btree (bugreport);
+CREATE INDEX processed_bugreports_device_id_has_error_bugreport__b2b9f_index ON public.processed_bugreports USING btree (device_id, has_error, bugreport, end_time);
+CREATE INDEX processed_bugreports_device_id_index ON public.processed_bugreports USING btree (device_id);
+CREATE INDEX processed_bugreports_end_time_index ON public.processed_bugreports USING btree (end_time);
+CREATE INDEX processed_bugreports_has_error_index ON public.processed_bugreports USING btree (has_error);
+
+Customers Table
+-- public.customers definition
+
+-- Drop table
+
+-- DROP TABLE public.customers;
+
+CREATE TABLE public.customers (
+	id varchar(255) NOT NULL,
+	created_at timestamptz(0) NULL,
+	updated_at timestamptz(0) NULL,
+	device_id varchar(255) NOT NULL,
+	customer_name varchar(255) NULL,
+	analysis_enabled bool NULL,
+	CONSTRAINT customers_device_id_unique UNIQUE (device_id),
+	CONSTRAINT customers_pkey PRIMARY KEY (id)
+);
+CREATE INDEX customers_device_id_index ON public.customers USING btree (device_id);
+
+-- public.nlp definition
+
+-- Drop table
+
+-- DROP TABLE public.nlp;
+
+CREATE TABLE public.nlp (
+	id varchar(255) NOT NULL,
+	created_at timestamptz(0) NULL,
+	updated_at timestamptz(0) NULL,
+	device_id varchar(255) NOT NULL,
+	end_time timestamptz(0) NOT NULL,
+	os varchar(255) NULL,
+	keys varchar(255) NULL,
+	"lock" bool NULL,
+	timezone varchar(255) NULL,
+	app_name varchar(255) NULL,
+	device_type varchar(255) NULL,
+	customer_name varchar(255) NULL,
+	unlockallowed bool NULL,
+	unlocksupported bool NULL,
+	weeks int2 NULL,
+	days int2 NULL,
+	hours int2 NULL,
+	minutes int2 NULL,
+	sysbootreason varchar(255) NULL,
+	f1 float8 NOT NULL,
+	f2 float8 NOT NULL,
+	f3 float8 NOT NULL,
+	f4 float8 NOT NULL,
+	f5 float8 NOT NULL,
+	f6 float8 NOT NULL,
+	f7 float8 NOT NULL,
+	f8 float8 NOT NULL,
+	f9 float8 NOT NULL,
+	f10 float8 NOT NULL,
+	f11 float8 NOT NULL,
+	f12 float8 NOT NULL,
+	f13 float8 NOT NULL,
+	f14 float8 NOT NULL,
+	f15 float8 NOT NULL,
+	f16 float8 NOT NULL,
+	f17 float8 NOT NULL,
+	f18 float8 NOT NULL,
+	f19 float8 NOT NULL,
+	f20 float8 NOT NULL,
+	f21 float8 NOT NULL,
+	f22 float8 NOT NULL,
+	f23 float8 NOT NULL,
+	f24 float8 NOT NULL,
+	f25 float8 NOT NULL,
+	f26 float8 NOT NULL,
+	f27 float8 NOT NULL,
+	f28 float8 NOT NULL,
+	f29 float8 NOT NULL,
+	f30 float8 NOT NULL,
+	f31 float8 NOT NULL,
+	f32 float8 NOT NULL,
+	f33 float8 NOT NULL,
+	f34 float8 NOT NULL,
+	f35 float8 NOT NULL,
+	f36 float8 NOT NULL,
+	f37 float8 NOT NULL,
+	f38 float8 NOT NULL,
+	f39 float8 NOT NULL,
+	f40 float8 NOT NULL,
+	f41 float8 NOT NULL,
+	f42 float8 NOT NULL,
+	f43 float8 NOT NULL,
+	f44 float8 NOT NULL,
+	f45 float8 NOT NULL,
+	f46 float8 NOT NULL,
+	f47 float8 NOT NULL,
+	f48 float8 NOT NULL,
+	f49 float8 NOT NULL,
+	f50 float8 NOT NULL,
+	f51 float8 NOT NULL,
+	f52 float8 NOT NULL,
+	f53 float8 NOT NULL,
+	f54 float8 NOT NULL,
+	f55 float8 NOT NULL,
+	f56 float8 NOT NULL,
+	f57 float8 NOT NULL,
+	f58 float8 NOT NULL,
+	f59 float8 NOT NULL,
+	f60 float8 NOT NULL,
+	f61 float8 NOT NULL,
+	f62 float8 NOT NULL,
+	f63 float8 NOT NULL,
+	f64 float8 NOT NULL,
+	f65 float8 NOT NULL,
+	f66 float8 NOT NULL,
+	f67 float8 NOT NULL,
+	f68 float8 NOT NULL,
+	f69 float8 NOT NULL,
+	f70 float8 NOT NULL,
+	f71 float8 NOT NULL,
+	f72 float8 NOT NULL,
+	f73 float8 NOT NULL,
+	f74 float8 NOT NULL,
+	f75 float8 NOT NULL,
+	f76 float8 NOT NULL,
+	f77 float8 NOT NULL,
+	f78 float8 NOT NULL,
+	f79 float8 NOT NULL,
+	f80 float8 NOT NULL,
+	f81 float8 NOT NULL,
+	f82 float8 NOT NULL,
+	f83 float8 NOT NULL,
+	f84 float8 NOT NULL,
+	f85 float8 NOT NULL,
+	f86 float8 NOT NULL,
+	f87 float8 NOT NULL,
+	f88 float8 NOT NULL,
+	f89 float8 NOT NULL,
+	f90 float8 NOT NULL,
+	f91 float8 NOT NULL,
+	f92 float8 NOT NULL,
+	f93 float8 NOT NULL,
+	f94 float8 NOT NULL,
+	f95 float8 NOT NULL,
+	f96 float8 NOT NULL,
+	f97 float8 NOT NULL,
+	f98 float8 NOT NULL,
+	f99 float8 NOT NULL,
+	f100 float8 NOT NULL,
+	f101 float8 NOT NULL,
+	f102 float8 NOT NULL,
+	f103 float8 NOT NULL,
+	f104 float8 NOT NULL,
+	f105 float8 NOT NULL,
+	f106 float8 NOT NULL,
+	f107 float8 NOT NULL,
+	f108 float8 NOT NULL,
+	f109 float8 NOT NULL,
+	f110 float8 NOT NULL,
+	f111 float8 NOT NULL,
+	f112 float8 NOT NULL,
+	f113 float8 NOT NULL,
+	f114 float8 NOT NULL,
+	f115 float8 NOT NULL,
+	f116 float8 NOT NULL,
+	f117 float8 NOT NULL,
+	f118 float8 NOT NULL,
+	f119 float8 NOT NULL,
+	f120 float8 NOT NULL,
+	f121 float8 NOT NULL,
+	f122 float8 NOT NULL,
+	f123 float8 NOT NULL,
+	f124 float8 NOT NULL,
+	f125 float8 NOT NULL,
+	f126 float8 NOT NULL,
+	f127 float8 NOT NULL,
+	f128 float8 NOT NULL,
+	f129 float8 NOT NULL,
+	f130 float8 NOT NULL,
+	f131 float8 NOT NULL,
+	f132 float8 NOT NULL,
+	f133 float8 NOT NULL,
+	f134 float8 NOT NULL,
+	f135 float8 NOT NULL,
+	f136 float8 NOT NULL,
+	f137 float8 NOT NULL,
+	f138 float8 NOT NULL,
+	f139 float8 NOT NULL,
+	f140 float8 NOT NULL,
+	f141 float8 NOT NULL,
+	f142 float8 NOT NULL,
+	f143 float8 NOT NULL,
+	f144 float8 NOT NULL,
+	f145 float8 NOT NULL,
+	f146 float8 NOT NULL,
+	f147 float8 NOT NULL,
+	f148 float8 NOT NULL,
+	f149 float8 NOT NULL,
+	f150 float8 NOT NULL,
+	f151 float8 NOT NULL,
+	f152 float8 NOT NULL,
+	f153 float8 NOT NULL,
+	f154 float8 NOT NULL,
+	f155 float8 NOT NULL,
+	f156 float8 NOT NULL,
+	f157 float8 NOT NULL,
+	f158 float8 NOT NULL,
+	f159 float8 NOT NULL,
+	f160 float8 NOT NULL,
+	f161 float8 NOT NULL,
+	f162 float8 NOT NULL,
+	f163 float8 NOT NULL,
+	f164 float8 NOT NULL,
+	f165 float8 NOT NULL,
+	f166 float8 NOT NULL,
+	f167 float8 NOT NULL,
+	f168 float8 NOT NULL,
+	f169 float8 NOT NULL,
+	f170 float8 NOT NULL,
+	f171 float8 NOT NULL,
+	f172 float8 NOT NULL,
+	f173 float8 NOT NULL,
+	f174 float8 NOT NULL,
+	f175 float8 NOT NULL,
+	f176 float8 NOT NULL,
+	f177 float8 NOT NULL,
+	f178 float8 NOT NULL,
+	f179 float8 NOT NULL,
+	f180 float8 NOT NULL,
+	f181 float8 NOT NULL,
+	f182 float8 NOT NULL,
+	f183 float8 NOT NULL,
+	f184 float8 NOT NULL,
+	f185 float8 NOT NULL,
+	f186 float8 NOT NULL,
+	f187 float8 NOT NULL,
+	f188 float8 NOT NULL,
+	f189 float8 NOT NULL,
+	f190 float8 NOT NULL,
+	f191 float8 NOT NULL,
+	f192 float8 NOT NULL,
+	f193 float8 NOT NULL,
+	f194 float8 NOT NULL,
+	f195 float8 NOT NULL,
+	f196 float8 NOT NULL,
+	f197 float8 NOT NULL,
+	f198 float8 NOT NULL,
+	f199 float8 NOT NULL,
+	f200 float8 NOT NULL,
+	f201 float8 NOT NULL,
+	f202 float8 NOT NULL,
+	f203 float8 NOT NULL,
+	f204 float8 NOT NULL,
+	f205 float8 NOT NULL,
+	f206 float8 NOT NULL,
+	f207 float8 NOT NULL,
+	f208 float8 NOT NULL,
+	f209 float8 NOT NULL,
+	f210 float8 NOT NULL,
+	f211 float8 NOT NULL,
+	f212 float8 NOT NULL,
+	f213 float8 NOT NULL,
+	f214 float8 NOT NULL,
+	f215 float8 NOT NULL,
+	f216 float8 NOT NULL,
+	f217 float8 NOT NULL,
+	f218 float8 NOT NULL,
+	f219 float8 NOT NULL,
+	f220 float8 NOT NULL,
+	f221 float8 NOT NULL,
+	f222 float8 NOT NULL,
+	f223 float8 NOT NULL,
+	f224 float8 NOT NULL,
+	f225 float8 NOT NULL,
+	f226 float8 NOT NULL,
+	f227 float8 NOT NULL,
+	f228 float8 NOT NULL,
+	f229 float8 NOT NULL,
+	f230 float8 NOT NULL,
+	f231 float8 NOT NULL,
+	f232 float8 NOT NULL,
+	f233 float8 NOT NULL,
+	f234 float8 NOT NULL,
+	f235 float8 NOT NULL,
+	f236 float8 NOT NULL,
+	f237 float8 NOT NULL,
+	f238 float8 NOT NULL,
+	f239 float8 NOT NULL,
+	f240 float8 NOT NULL,
+	f241 float8 NOT NULL,
+	f242 float8 NOT NULL,
+	f243 float8 NOT NULL,
+	f244 float8 NOT NULL,
+	f245 float8 NOT NULL,
+	f246 float8 NOT NULL,
+	f247 float8 NOT NULL,
+	f248 float8 NOT NULL,
+	f249 float8 NOT NULL,
+	f250 float8 NOT NULL,
+	f251 float8 NOT NULL,
+	f252 float8 NOT NULL,
+	f253 float8 NOT NULL,
+	f254 float8 NOT NULL,
+	f255 float8 NOT NULL,
+	f256 float8 NOT NULL,
+	f257 float8 NOT NULL,
+	f258 float8 NOT NULL,
+	f259 float8 NOT NULL,
+	f260 float8 NOT NULL,
+	f261 float8 NOT NULL,
+	f262 float8 NOT NULL,
+	f263 float8 NOT NULL,
+	f264 float8 NOT NULL,
+	f265 float8 NOT NULL,
+	f266 float8 NOT NULL,
+	f267 float8 NOT NULL,
+	f268 float8 NOT NULL,
+	f269 float8 NOT NULL,
+	f270 float8 NOT NULL,
+	f271 float8 NOT NULL,
+	f272 float8 NOT NULL,
+	f273 float8 NOT NULL,
+	f274 float8 NOT NULL,
+	f275 float8 NOT NULL,
+	f276 float8 NOT NULL,
+	f277 float8 NOT NULL,
+	f278 float8 NOT NULL,
+	f279 float8 NOT NULL,
+	f280 float8 NOT NULL,
+	f281 float8 NOT NULL,
+	f282 float8 NOT NULL,
+	f283 float8 NOT NULL,
+	f284 float8 NOT NULL,
+	f285 float8 NOT NULL,
+	f286 float8 NOT NULL,
+	f287 float8 NOT NULL,
+	f288 float8 NOT NULL,
+	f289 float8 NOT NULL,
+	f290 float8 NOT NULL,
+	f291 float8 NOT NULL,
+	f292 float8 NOT NULL,
+	f293 float8 NOT NULL,
+	f294 float8 NOT NULL,
+	f295 float8 NOT NULL,
+	f296 float8 NOT NULL,
+	f297 float8 NOT NULL,
+	f298 float8 NOT NULL,
+	f299 float8 NOT NULL,
+	f300 float8 NOT NULL,
+	CONSTRAINT nlp_pkey PRIMARY KEY (id)
+);
+CREATE INDEX nlp_device_id_index ON public.nlp USING btree (device_id);
+CREATE INDEX nlp_device_id_os_index ON public.nlp USING btree (device_id, os);
+CREATE INDEX nlp_end_time_index ON public.nlp USING btree (end_time);
+
+-- Table Triggers
+
+create trigger insert_nlp_trigger after
+insert
+    on
+    public.nlp for each row execute function nlp_for_clustering_insert();
+	
+Sherlock Database - Clustering Table
+-- public.clustering definition
+
+-- Drop table
+
+-- DROP TABLE public.clustering;
+
+CREATE TABLE public.clustering (
+	id varchar(255) NOT NULL,
+	created_at timestamptz(0) NULL,
+	updated_at timestamptz(0) NULL,
+	pc1 float8 NOT NULL,
+	pc2 float8 NOT NULL,
+	pc3 float8 NOT NULL,
+	pc4 float8 NOT NULL,
+	pc5 float8 NOT NULL,
+	cluster_id varchar(255) NULL,
+	anomalies bool NULL,
+	os varchar(255) NULL,
+	device_id varchar(255) NULL,
+	keys varchar(255) NULL,
+	"lock" varchar(255) NULL,
+	timezone varchar(255) NULL,
+	app_name varchar(255) NULL,
+	customer_name varchar(255) NULL,
+	unlockallowed bool NULL,
+	unlocksupported bool NULL,
+	weeks int2 NULL,
+	days int2 NULL,
+	hours int2 NULL,
+	minutes int2 NULL,
+	sysbootreason varchar(255) NULL,
+	device_type varchar(255) NULL,
+	end_time timestamptz(0) NULL,
+	CONSTRAINT clustering_pkey PRIMARY KEY (id)
+);
+CREATE INDEX clustering_device_id_index ON public.clustering USING btree (device_id);
+CREATE INDEX clustering_device_type_index ON public.clustering USING btree (device_type);
+CREATE INDEX clustering_end_time_device_type_index ON public.clustering USING btree (end_time, device_type);
+CREATE INDEX clustering_end_time_index ON public.clustering USING btree (end_time);
+
+
+-- public.device_summary definition
+
+-- Drop table
+
+-- DROP TABLE public.device_summary;
+
+CREATE TABLE public.device_summary (
+	id varchar(255) NOT NULL,
+	created_at timestamptz(0) NULL,
+	updated_at timestamptz(0) NULL,
+	device_id varchar(255) NULL,
+	bugreport varchar(255) NULL,
+	end_time timestamptz(0) NULL,
+	device_summary jsonb NULL,
+	CONSTRAINT device_summary_pkey PRIMARY KEY (id)
+);
+CREATE INDEX device_summary_device_id_end_time_index ON public.device_summary USING btree (device_id, end_time);
+CREATE INDEX device_summary_device_id_index ON public.device_summary USING btree (device_id);
+
+
+-- public.meetings definition
+
+-- Drop table
+
+-- DROP TABLE public.meetings;
+
+CREATE TABLE public.meetings (
+	id varchar(255) NOT NULL,
+	created_at timestamptz(0) NULL,
+	updated_at timestamptz(0) NULL,
+	device_id varchar(255) NULL,
+	bugreport varchar(255) NULL,
+	"start" timestamptz(0) NULL,
+	"end" timestamptz(0) NULL,
+	duration float4 NULL,
+	device_type varchar(255) NULL,
+	CONSTRAINT meetings_pkey PRIMARY KEY (id)
+);
+CREATE INDEX meetings_device_id_bugreport_index ON public.meetings USING btree (device_id, bugreport);
+CREATE INDEX meetings_device_id_index ON public.meetings USING btree (device_id);
+
+-- public.tags definition
+
+-- Drop table
+
+-- DROP TABLE public.tags;
+
+CREATE TABLE public.tags (
+	id varchar(255) NOT NULL,
+	created_at timestamptz(0) NULL,
+	updated_at timestamptz(0) NULL,
+	device_id varchar(255) NOT NULL,
+	end_time timestamptz(0) NOT NULL,
+	tag jsonb NULL,
+	CONSTRAINT tags_pkey PRIMARY KEY (id)
+);
+CREATE INDEX tags_device_id_index ON public.tags USING btree (device_id);
+CREATE INDEX tags_end_time_device_id_index ON public.tags USING btree (end_time, device_id);
+CREATE INDEX tags_end_time_index ON public.tags USING btree (end_time);
