@@ -5,10 +5,11 @@ load_dotenv()
 import os
 
 openai.api_type = "azure"
-openai.api_base = "https://resourceforazureopenaidemo.openai.azure.com/"
+openai.api_base = os.environ['AZURE_URL']
 openai.api_version = "2023-05-15"
-openai.api_key = 'cfb9b2ee9f43405a944adaf03727d04c'
-deployment_name="gpt-35-turbo"
+openai.api_key = os.environ['AZURE_API_KEY']
+deployment_name=os.environ['AZURE_DEPLOYMENT_NAME']
+
 def get_completion_from_messages(system_message, user_message, temperature=0, max_tokens=500) -> str:
 
     messages = [
