@@ -53,24 +53,62 @@ Answer: Final answer here
 #setup llm chain
 import streamlit as st
 
+# Define a function to retrieve data in batches
+def fetch_data_in_batches(query, batch_size):
+    offset = 0
+    all_results = []
+
+    while True:
+        with st.spinner("Generating response, please wait...."):
+        # Create the SQL query with a LIMIT clause for the current batch
+        
+   
+        #prompt = f"{context}\nQuestion: {query}\nAnswer:"
+
+            question = QUERY.format(question=query)
+            print(agent_executor.run(question))
+            response=agent_executor.run(question)
+        
+            with st.chat_message("assistant"):
+                st.markdown(response)
+            
+            st.session_state.messages.append({"role": "assistant", "content": response})
+        
+        query_with_limit = f"{query} OFFSET {offset} LIMIT {batch_size}"
+
+        # Execute the SQL query to fetch the current batch
+        result = db._execute(query_with_limit)
+
+        # Check if the current batch is empty
+        if not result:
+            break
+
+        # Append the current batch to the list of all results
+        all_results.extend(result)
+
+        # Increment the offset
+        offset += batch_size
+
+    return all_results
+
 st.title("Welcome to Logitech !!!")
 
 query = st.chat_input("Say something..")
 
 if query:
-    st.write(f"user asked:{query}")
+    st.write(f"user asked: {query}")
 
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-    # Display chat messages from history on app rerun
+# Display chat messages from history on app rerun
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
 # React to user input
-if query := st.chat_input("Please ask your queries related to your Long term financial model ?"):
+if query := st.chat_input("Please ask your queries related to Logitech?"):
     # Display user message in chat message container
     with st.chat_message("user"):
         st.markdown(query)
@@ -78,36 +116,21 @@ if query := st.chat_input("Please ask your queries related to your Long term fin
     st.session_state.messages.append({"role": "user", "content": query})
 
 
-with st.spinner("Generating response, please wait...."):
-    if query:
-        #prompt = f"{context}\nQuestion: {query}\nAnswer:"
+# Define the user's SQL query (generic)
+user_query = query  # You can adapt this to handle any user's query
 
-        question = QUERY.format(question=query)
-        print(agent_executor.run(question))
-        response=agent_executor.run(question)
-        with st.chat_message("assistant"):
-            st.markdown(response)
-        
-        st.session_state.messages.append({"role": "assistant", "content": response})
+# Set the batch size (you can adjust this as needed)
+batch_size = 10
 
+# Fetch data in batches using the user's query
+query_results=[]
+if query:
+    query_results = fetch_data_in_batches(user_query, batch_size)
 
-# def execute_chain():
-#     print("Type 'exit' to quit")
+# Display the results
+with st.chat_message("assistant"):
+    #st.markdown("The results of the query are:")
+    for row in query_results:
+        st.markdown(row)  # Display the results as they are in the database
 
-
-# exeuction from CLI
-    # while True:
-    #     feed = input("Enter your question: ")
-
-    #     if feed.lower() == 'exit':
-    #         print('Exiting...')
-    #         break
-    #     else:
-    #         try:
-    #             question = QUERY.format(question=feed)
-    #             print(agent_executor.run(question))
-    #         except Exception as e:
-    #             print(e)
-
-
-#execute_chain()
+    st.session_state.messages.append({"role": "assistant", "content": "The results of the query are listed above."})
